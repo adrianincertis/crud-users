@@ -1,0 +1,21 @@
+<div *ngIf="user">
+    <h2>{{ user.personalData.name }} {{ user.personalData.firstName }}</h2>
+    <div>
+      <h3>Datos personales</h3>
+      <p>NIF: {{ user.personalData.nif }}</p>
+      <p>Nombre: {{ user.personalData.name }}</p>
+      <p>1er Apellido: {{ user.personalData.firstName }}</p>
+      <p>2º Apellido: {{ user.personalData.secondName }}</p>
+      <p>Género: {{ user.personalData.gender }}</p>
+      <p>Fecha de nacimiento: {{ user.personalData.birthDate }}</p>
+    </div>
+    <div>
+      <h3>Dirección</h3>
+      <p>Calle: {{ user.address.street }}</p>
+      <p>Número: {{ user.address.number }}</p>
+      <p>Puerta: {{ user.address.door }}</p>
+      <p>Código Postal: {{ user.address.postalCode }}</p>
+      <p>Ciudad: {{ user.address.city }}</p>
+    </div>
+  </div>
+  

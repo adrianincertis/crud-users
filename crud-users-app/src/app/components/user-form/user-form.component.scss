@@ -1,0 +1,51 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .tabs {
+        display: flex;
+        gap: 1em;
+
+        button {
+            padding: 0.5em 1em;
+            border: none;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+
+            &.active {
+                background: #0056b3;
+            }
+        }
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input,
+    select {
+        padding: 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 0.75em 1.5em;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        align-self: flex-start;
+
+        &:hover {
+            background: #218838;
+        }
+    }
+}

@@ -1,0 +1,107 @@
+<div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <label for="type">Tipo de Usuario</label>
+    <select id="type" formControlName="type" (change)="userType = userForm.get('type')!.value">
+      <option [value]="USER_TYPE.PLAINTIFF">Demandante</option>
+      <option [value]="USER_TYPE.EMPLOYEE">Empleado</option>
+    </select>
+
+    <div class="sections">
+      <button type="button" *ngFor="let section of sections" (click)="setCurrentSection(section.value)">
+        {{ section.label }}
+      </button>
+    </div>
+
+    <div *ngIf="currentSection === USER_FORM_SECTIONS.PERSONAL_DATA" formGroupName="personalData">
+      <label style="margin-right: 0.25rem;" for="nif">NIF o Pasaporte</label>
+      <input style="margin-right: 0.25rem;" id="nif" formControlName="nif" type="text">
+      <div *ngIf="userForm.get('personalData.nif')!.invalid && userForm.get('personalData.nif')!.touched">
+        El NIF o Pasaporte es obligatorio.
+      </div>
+
+      <label style="margin-right: 0.25rem;" for="name">Nombre</label>
+      <input style="margin-right: 0.25rem;" id="name" formControlName="name" type="text">
+      <div *ngIf="userForm.get('personalData.name')!.invalid && userForm.get('personalData.name')!.touched">
+        El nombre es obligatorio.
+      </div>
+
+      <label style="margin-right: 0.25rem;" for="firstName">Primer Apellido</label>
+      <input style="margin-right: 0.25rem;" id="firstName" formControlName="firstName" type="text">
+      <div *ngIf="userForm.get('personalData.firstName')!.invalid && userForm.get('personalData.firstName')!.touched">
+        El primer apellido es obligatorio.
+      </div>
+
+      <label style="margin-right: 0.25rem;" for="secondName">Segundo Apellido</label>
+      <input style="margin-right: 0.25rem;" id="secondName" formControlName="secondName" type="text">
+
+      <label style="margin-right: 0.25rem;" for="gender">Género</label>
+      <input style="margin-right: 0.25rem;" id="gender" formControlName="gender" type="text">
+
+      <label style="margin-right: 0.25rem;" for="birthDate">Fecha de Nacimiento</label>
+      <input id="birthDate" formControlName="birthDate" type="date">
+    </div>
+
+    <div *ngIf="currentSection === USER_FORM_SECTIONS.ADDRESS" formGroupName="address">
+      <label style="margin-right: 0.25rem;" for="street">Calle</label>
+      <input style="margin-right: 0.25rem;" id="street" formControlName="street" type="text">
+      <div *ngIf="userForm.get('address.street')!.invalid && userForm.get('address.street')!.touched">
+        La calle es obligatoria.
+      </div>
+
+      <label style="margin-right: 0.25rem;" for="number">Número</label>
+      <input style="margin-right: 0.25rem;" id="number" formControlName="number" type="text">
+      <div *ngIf="userForm.get('address.number')!.invalid && userForm.get('address.number')!.touched">
+        El número es obligatorio.
+      </div>
+
+      <label style="margin-right: 0.25rem;" for="door">Puerta</label>
+      <input style="margin-right: 0.25rem;" id="door" formControlName="door" type="text">
+
+      <label style="margin-right: 0.25rem;" for="postalCode">Código Postal</label>
+      <input style="margin-right: 0.25rem;" id="postalCode" formControlName="postalCode" type="text">
+      <div *ngIf="userForm.get('address.postalCode')!.invalid && userForm.get('address.postalCode')!.touched">
+        El código postal es obligatorio.
+      </div>
+
+      <label style="margin-right: 0.25rem;" for="city">Ciudad</label>
+      <input style="margin-right: 0.25rem;" id="city" formControlName="city" type="text">
+      <div *ngIf="userForm.get('address.city')!.invalid && userForm.get('address.city')!.touched">
+        La ciudad es obligatoria.
+      </div>
+    </div>
+
+    <div *ngIf="currentSection === USER_FORM_SECTIONS.STUDIES && userType === USER_TYPE.PLAINTIFF">
+      <div formArrayName="education" *ngFor="let education of education.controls; let i = index" [formGroupName]="i">
+        <label style="margin-right: 0.25rem;" for="institution">Nombre Institución</label>
+        <input style="margin-right: 0.25rem;" id="institution" formControlName="institution" type="text">
+
+        <label style="margin-right: 0.25rem;" for="degree">Titulación</label>
+        <input style="margin-right: 0.25rem;" id="degree" formControlName="degree" type="text">
+
+        <label style="margin-right: 0.25rem;" for="date">Fecha</label>
+        <input id="date" formControlName="date" type="date">
+
+        <button type="button" (click)="removeEducation(i)">Eliminar</button>
+      </div>
+      <button type="button" (click)="addEducation()">Añadir Educación</button>
+    </div>
+
+    <div *ngIf="currentSection === USER_FORM_SECTIONS.WORK_EXPERIENCE && userType === USER_TYPE.PLAINTIFF">
+      <div formArrayName="workExperience" *ngFor="let work of workExperience.controls; let i = index" [formGroupName]="i">
+        <label style="margin-right: 0.25rem;" for="company">Nombre Empresa</label>
+        <input style="margin-right: 0.25rem;" id="company" formControlName="company" type="text">
+
+        <label style="margin-right: 0.25rem;" for="jobTitle">Puesto de Trabajo</label>
+        <input style="margin-right: 0.25rem;" id="jobTitle" formControlName="jobTitle" type="text">
+
+        <label style="margin-right: 0.25rem;" for="date">Fecha</label>
+        <input id="date" formControlName="date" type="date">
+
+        <button type="button" (click)="removeWorkExperience(i)">Eliminar</button>
+      </div>
+      <button type="button" (click)="addWorkExperience()">Añadir Experiencia Laboral</button>
+    </div>
+
+    <button type="submit">Guardar</button>
+  </form>
+</div>

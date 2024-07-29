@@ -1,0 +1,33 @@
+<div>
+    <button (click)="createUser()">Nuevo usuario</button>
+    <select [(ngModel)]="selectedFilter" (change)="filterUsers()">
+      <option value="null">Todos</option>
+      <option [value]="USER_TYPE.PLAINTIFF">Demandante</option>
+      <option [value]="USER_TYPE.EMPLOYEE">Empleado</option>
+    </select>
+    <table>
+      <thead>
+        <tr>
+          <th>NIF</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Tipo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{ user.personalData.nif }}</td>
+          <td>{{ user.personalData.name }}</td>
+          <td>{{ user.personalData.firstName }}</td>
+          <td>{{ user.type | userType }}</td>
+          <td>
+            <button (click)="viewUser(user.id!)">Ver</button>
+            <button (click)="editUser(user.id!)">Editar</button>
+            <button (click)="deleteUser(user.id!)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,6 @@
+export enum USER_FORM_SECTIONS {
+    PERSONAL_DATA = 1,
+    ADDRESS,
+    STUDIES,
+    WORK_EXPERIENCE
+}
