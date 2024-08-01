@@ -17,9 +17,13 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
+    this.getAllUsers();
+    this.filterUsers();
+  }
+
+  getAllUsers() {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
-      this.filterUsers();
     });
   }
 
@@ -44,8 +48,9 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    if (confirm(`¿Está seguro de que desea borrar al usuario ${user.personalData.firstName}`)) {
+    if (confirm(`¿Está seguro de que desea borrar al usuario ${user.personalData.name} ${user.personalData.firstName}?`)) {
       this.userService.deleteUser(user.id!);
+      this.getAllUsers();
       this.filterUsers();
     }
   }
