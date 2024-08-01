@@ -17,5 +17,21 @@
       <p>Código Postal: {{ user.address.postalCode }}</p>
       <p>Ciudad: {{ user.address.city }}</p>
     </div>
+    <div *ngIf="user.education">
+      <h3>Estudios</h3>
+      <div *ngFor="let edu of user.education">
+        <p>Institución: {{ edu.institution }}</p>
+        <p>Titulación: {{ edu.degree }}</p>
+        <p>Fecha: {{ edu.date }}</p>
+      </div>
+    </div>
+    <div *ngIf="user.workExperience">
+      <h3>Experencia laboral</h3>
+      <div *ngFor="let work of user.workExperience">
+        <p>Institución: {{ work.company }}</p>
+        <p>Titulación: {{ work.jobTitle }}</p>
+        <p>Fecha: {{ work.date }}</p>
+      </div>
+    </div>
   </div>
   
