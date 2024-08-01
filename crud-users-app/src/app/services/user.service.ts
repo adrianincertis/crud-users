@@ -27,9 +27,6 @@ export class UserService {
       },
       education: [
         { institution: 'Universidad Barcelona', degree: 'Licenciatura', date: '2012-06-30' }
-      ],
-      workExperience: [
-        { company: 'Empresa Hola', jobTitle: 'Desarrollador', date: '2014-03-01' }
       ]
     },
     {
@@ -49,9 +46,6 @@ export class UserService {
         postalCode: '28002',
         city: 'Madrid'
       },
-      education: [
-        { institution: 'Universidad Complutense', degree: 'Licenciatura', date: '2022-07-30' }
-      ],
       workExperience: [
         { company: 'Empresa Ejemplo', jobTitle: 'Desarrolladora', date: '2015-03-01' }
       ]

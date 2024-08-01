@@ -17,10 +17,8 @@ export class UserFormComponent implements OnInit {
   userId: number | null = null;
   userType: number = USER_TYPE.PLAINTIFF;
   sections: { value: number, label: string }[] = [
-    { value: USER_FORM_SECTIONS.PERSONAL_DATA, label: 'Datos personales'},
-    { value: USER_FORM_SECTIONS.ADDRESS, label: 'Dirección'},
-    { value: USER_FORM_SECTIONS.STUDIES, label: 'Estudios'},
-    { value: USER_FORM_SECTIONS.WORK_EXPERIENCE, label: 'Experencia laboral'}
+    { value: USER_FORM_SECTIONS.PERSONAL_DATA, label: 'Datos Personales' },
+    { value: USER_FORM_SECTIONS.ADDRESS, label: 'Dirección' }
   ];
   currentSection: number = this.sections[0].value;
 
@@ -62,9 +60,27 @@ export class UserFormComponent implements OnInit {
           this.userForm.patchValue(user);
           this.userType = user.type;
           this.setFormArrays(user);
+          this.changeSections();
         });
       }
     });
+  }
+
+  changeSections() {
+    this.sections = [
+      { value: USER_FORM_SECTIONS.PERSONAL_DATA, label: 'Datos Personales' },
+      { value: USER_FORM_SECTIONS.ADDRESS, label: 'Dirección' }
+    ];
+    switch (this.userType) {
+      case USER_TYPE.PLAINTIFF:
+        console.log('si')
+        this.sections.push({ value: USER_FORM_SECTIONS.STUDIES, label: 'Estudios' });
+        break;
+      case USER_TYPE.EMPLOYEE:
+        console.log('si')
+        this.sections.push({ value: USER_FORM_SECTIONS.WORK_EXPERIENCE, label: 'Experiencia Laboral' });
+        break;
+    }
   }
 
   setFormArrays(user: User) {
@@ -74,6 +90,10 @@ export class UserFormComponent implements OnInit {
     if (user.workExperience) {
       user.workExperience.forEach(work => this.addWorkExperience(work));
     }
+  }
+
+  get currentSectionLabel(): string | undefined {
+    return this.sections.find(section => section.value === this.currentSection)?.label
   }
 
   get education(): FormArray {
@@ -105,7 +125,7 @@ export class UserFormComponent implements OnInit {
       return;
     }
     let user: User = {
-      type: this.userForm.get('type')!.value,
+      type: Number(this.userForm.get('type')!.value),
       personalData: this.userForm.get('personalData')!.value,
       address: this.userForm.get('address')!.value,
       education: this.userType === USER_TYPE.PLAINTIFF ? this.userForm.get('education')!.value : [],
@@ -131,5 +151,9 @@ export class UserFormComponent implements OnInit {
 
   get USER_TYPE() {
     return USER_TYPE;
+  }
+
+  get Number() {
+    return Number;
   }
 }
