@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { USER_TYPE } from '../../enums/user-type.enum';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-user-list',
@@ -14,7 +15,7 @@ export class UserListComponent implements OnInit {
   filteredUsers: User[] = [];
   selectedFilter: string | null = null;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private notificationService: NotificationService) {}
 
   ngOnInit() {
     this.getAllUsers();
@@ -52,6 +53,7 @@ export class UserListComponent implements OnInit {
       this.userService.deleteUser(user.id!);
       this.getAllUsers();
       this.filterUsers();
+      this.notificationService.showNotification(`El usuario ${user.personalData.name} ${user.personalData.firstName} se ha eliminado correctamente`);
     }
   }
 

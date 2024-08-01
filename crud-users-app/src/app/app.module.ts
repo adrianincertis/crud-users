@@ -8,6 +8,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserService } from './services/user.service';
 import { AppRoutingModule } from './app-routing.module';
 import { UserTypePipe } from './pipes/user-type.pipe';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { UserTypePipe } from './pipes/user-type.pipe';
     UserListComponent,
     UserDetailComponent,
     UserFormComponent,
-    UserTypePipe
+    UserTypePipe,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
